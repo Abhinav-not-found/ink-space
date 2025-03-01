@@ -11,9 +11,13 @@ const BlogSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        required: false,
+        required: true,
         default:'category'
     },
+    username:{
+      type:String,
+      required:true,
+    }
 }, { timestamps: true });
 
 export default mongoose.models.Blog || mongoose.model("Blog", BlogSchema);

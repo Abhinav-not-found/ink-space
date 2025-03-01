@@ -51,12 +51,12 @@ const page = () => {
             <div className="bg-red-300 w-full h-60 rounded-2xl mb-6"></div>
           </section>
           <section className="mb-8">
-            <h1 className="text-5xl font-bold first-letter:uppercase">
+            <p className="text-6xl font-bold first-letter:uppercase">
               {blogData.title || "The Future of Web Development"}
-            </h1>
+            </p>
             <div className="text-gray-500 text-sm mt-2 flex  gap-4">
               <p className="text-lg">
-                By <span className="font-semibold">John Doe</span> | Published
+                By <span className="font-semibold first-letter:uppercase">{blogData.username || 'John Doe'}</span> | Published
                 on {date?.split("T")[0]}
               </p>
               <Badge>{ blogData.category || 'Category'}</Badge>

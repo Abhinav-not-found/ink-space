@@ -1,9 +1,10 @@
 'use client'
 import { Button } from '@/components/ui/button';
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import TipTapEditor from "@/components/TipTapEditor";
+import { AuthContext } from '@/context/authContext';
 
 const Page = () => {
   const [title, setTitle] = useState('');
@@ -11,17 +12,18 @@ const Page = () => {
   const [category, setCategory] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { user } = useContext(AuthContext)
 
   const handleSubmit = async () => {
     if (!title || !desc || !category) return toast.error('This field is empty!');
 
     setLoading(true);
+    const username = user.username
     try {
-      // console.log('Sending data', { title, desc, category });
       const res = await fetch('/api/blog', {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, desc, category }),
+        body: JSON.stringify({ title, desc, category, username }),
       });
 
       const data = await res.json();

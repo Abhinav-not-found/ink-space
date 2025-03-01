@@ -73,7 +73,7 @@ const LoginPage = () => {
               )}
             </button>
           </div>
-          <Button onClick={handleLogin} className='w-5/6'>{loading? 'loading...':'login'}</Button>
+          <Button onClick={handleLogin} className='w-5/6'>{loading? 'Please wait...':'login'}</Button>
         </div>
         <div className='flex flex-col items-center mt-4'>
           <p className='mt-4 mb-10'>or continue with</p>
