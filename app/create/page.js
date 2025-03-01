@@ -31,7 +31,7 @@ const Page = () => {
         setTitle('');
         setDesc('');
         console.log(data);
-        router.push('/');
+        router.push('/home');
       } else {
         toast.error(data.message);
       }
