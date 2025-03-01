@@ -17,7 +17,7 @@ import { toast } from 'sonner';
 
 
 
-const page = () => {
+const LoginPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible((prevState) => !prevState);
 
@@ -92,4 +92,4 @@ const page = () => {
   )
 }
 
-export default page
+export default LoginPage

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
 
 const Create = () => {
@@ -15,7 +16,9 @@ const Create = () => {
       </Button>
       </div>
       <div className="flex">
-        <img
+        <Image
+          width={72}
+          height={100}
           className="w-72 h-auto mt-2"
           src={'/pictures/dashboard.png'}
           alt="girl writing blog"
