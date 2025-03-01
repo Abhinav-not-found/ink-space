@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next-auth/prisma-adapter": "^1.0.7",
     "@next/font": "^14.2.15",
     "@phosphor-icons/react": "github:phosphor-icons/react",
     "@prisma/client": "^6.4.1",
@@ -29,7 +28,6 @@
     "lucide-react": "^0.476.0",
     "mongoose": "^8.11.0",
     "next": "15.2.1-canary.1",
-    "next-auth": "^4.24.11",
     "next-themes": "^0.4.4",
     "phosphor-icons": "^1.4.2",
     "react": "^19.0.0",
