@@ -25,14 +25,17 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext)
   const router = useRouter();
+  const [loading,setLoading]=useState(false)
 
   const handleLogin = async (e) => {
+    setLoading(true)
     e.preventDefault();
 
     if ( !email || !password ) return toast.error('These fields are required!')
     const result = await login(email, password)  
     if(result?.success) {
       router.push('/home')
+      setLoading(false)
     }
   }
 
@@ -70,7 +73,7 @@ const LoginPage = () => {
               )}
             </button>
           </div>
-          <Button onClick={handleLogin} className='w-5/6'>login</Button>
+          <Button onClick={handleLogin} className='w-5/6'>{loading? 'loading...':'login'}</Button>
         </div>
         <div className='flex flex-col items-center mt-4'>
           <p className='mt-4 mb-10'>or continue with</p>
