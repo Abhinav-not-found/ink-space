@@ -37,6 +37,9 @@ const LoginPage = () => {
       router.push('/home')
       setLoading(false)
     }
+    else{
+      setLoading(false)
+    }
   }
 
 

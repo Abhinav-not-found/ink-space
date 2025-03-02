@@ -1,61 +1,49 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { createContext, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const route = useRouter()
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      fetchUserProfile(token);
-    } else {
-      setLoading(false);
-    }
+    const userId = localStorage.getItem("userId");
+    setIsLoggedIn(!!userId);
   }, []);
 
-  const fetchUserProfile = async () => {
+  useEffect(() =>{
+      fetchUserInfo()
+  }, [])
+
+  const fetchUserInfo = async() =>{
+    const userId = localStorage.getItem('userId')
+    if (!userId) {
+      setIsLoggedIn(false);
+      return;
+    }
     try {
-      const token = localStorage.getItem("token");
-      const userId = localStorage.getItem("userId"); // Retrieve userId
-  
-      if (!token || !userId) {
-        setLoading(false);
-        return;
-      }
-  
       const res = await fetch(`/api/profile/${userId}`, {
-        headers: { Authorization: `Bearer ${token}` },
+        method: "GET",
+        credentials: "include",
       });
-  
+
       if (res.ok) {
-        const data = await res.json();
-        setUser(data);
+        const userData = await res.json();
+        setUser(userData);
+        setIsLoggedIn(true);
       } else {
-        const errorData = await res.json();
-        
-        // Handle authentication errors
-        if (res.status === 401 || res.status === 403) {
-          localStorage.removeItem("token");
-          localStorage.removeItem("userId");
-          setUser(null);
-          toast.error("Session expired. Please log in again.");
-        } else {
-          toast.error(errorData.error || "Failed to fetch user data.");
-        }
+        setIsLoggedIn(false);
       }
     } catch (error) {
       console.error("Error fetching user:", error);
     }
-    setLoading(false);
-  };
-  
+  }
+
   const login = async (email, password) => {
     try {
       const res = await fetch("/api/auth/login", {
@@ -63,62 +51,42 @@ export const AuthProvider = ({ children }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-  
+
       const data = await res.json();
-      console.log("Login response data:", data); // Debugging
-  
       if (res.ok) {
-        if (!data.token || !data.user?.id) { // ✅ user.id should now exist
-          return toast.error("Login failed. Missing user data.");
-        }
-  
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("userId", data.user.id); // ✅ Store the userId correctly
+        document.cookie = `token=${data.token}; path=/; max-age=86400;`;
+        document.cookie = `userId=${data.user.id}; path=/; max-age=86400;`;
+
+        localStorage.setItem("userId", data.user.id);
         setUser(data.user);
+        setIsLoggedIn(true); // ✅ Update state immediately
         toast.success("Login successful!");
-        return { success: true };
+        router.push("/home"); // ✅ Redirect after login
       } else {
-        toast.error(data.error || "Something went wrong. Please try again.");
-        return { success: false };
+        toast.error(data.error || "Something went wrong.");
       }
     } catch (error) {
       console.error("Login error:", error);
-      toast.error("Network error. Please check your connection.");
+      toast.error("Network error.");
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await fetch("/api/auth/logout"); // ✅ Call backend to remove cookies
+  
+      localStorage.removeItem("userId");
+      setUser(null);
+      setIsLoggedIn(false);
+      router.push("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
     }
   };
   
-  const register = async (username, email, password) => {
-    try {
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
-      });
-
-      const data = await res.json();
-      if (res.ok) {
-        toast.success('Registered Successfully!!!')
-        return { success: true };
-      } else {
-        toast.error(data.error || 'Something went wrong. Pls try again.')
-        return { success: false };
-      }
-    } catch (error) {
-      console.error("Registration error:", error);
-      toast.error("Network error. Please check your connection.");
-      return { success: false };
-    }
-  };
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    setUser(null);
-    route.push('/')
-  };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+    <AuthContext.Provider value={{ user, isLoggedIn, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

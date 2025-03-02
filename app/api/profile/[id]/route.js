@@ -10,11 +10,12 @@ export async function GET(req, { params }) {
     const userId = params.id;
     console.log("Fetching user with ID:", userId);
 
-    if (!mongoose.Types.ObjectId.isValid(userId)) { // ✅ Check if ID is valid for MongoDB
+    if (!mongoose.Types.ObjectId.isValid(userId)) { 
       return NextResponse.json({ error: "Invalid user ID format" }, { status: 400 });
     }
 
-    const user = await User.findById(userId).select("id username email");
+    // ✅ Fixed: Using `_id` instead of `id`
+    const user = await User.findById(userId).select("_id username email"); 
     
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
