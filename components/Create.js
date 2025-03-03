@@ -3,10 +3,14 @@ import { AuthContext } from "@/context/authContext";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
+import GirlPNG from '../public/pictures/girl.png'
+import BoyPNG from '../public/pictures/boy.png'
 
 const Create = () => {
   const { user } = useContext(AuthContext)
   const name = user?.username
+  const gender = user?.gender
+  console.log(gender)
   return (
     <div className=" w-full h-52 flex justify-between items-center bg-red-300 mt-1 px-6 py-20 rounded-xl">
       <div className="w-1/2">
@@ -21,10 +25,8 @@ const Create = () => {
       </div>
       <div className="flex">
         <Image
-          width={72}
-          height={100}
-          className="w-72 h-auto mt-2"
-          src={'/pictures/dashboard.png'}
+          className={`w-[11rem] h-auto ${gender === 'male' && 'mb-4'} ${gender === 'female' && 'mb-10'} scale-x-[-1]`}
+          src={gender === 'male' ? BoyPNG : GirlPNG}
           alt="girl writing blog"
         />
       </div>

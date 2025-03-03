@@ -84,9 +84,35 @@ export const AuthProvider = ({ children }) => {
     }
   };
   
+  const register = async (fullname, email, password) => {
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username:fullname , email, password }),
+      });
+
+      const data = await res.json();
+      console.log(data)
+
+      if (!res.ok) {
+        throw new Error(data.message || "Registration failed");
+      }
+
+      // Save user data
+      setUser(data.user);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      toast.success("Registration successful!");
+      return { success: true };
+    } catch (error) {
+      toast.error(error.message);
+      return { success: false, message: error.message };
+    }
+  };
 
   return (
-    <AuthContext.Provider value={{ user, isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ user, isLoggedIn, login, logout, register }}>
       {children}
     </AuthContext.Provider>
   );

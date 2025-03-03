@@ -4,6 +4,9 @@ import { IoMailOutline } from "react-icons/io5";
 import { PiGithubLogo } from "react-icons/pi";
 import Logo from '../public/logo.svg'
 import Image from 'next/image';
+// import ElasticLine from './ElasticLine'
+import ElasticLine from "@/fancy/components/physics/elastic-line"
+
 
 const LandingFooter = () => {
   return (
@@ -42,7 +45,18 @@ const LandingFooter = () => {
             <Image src={Logo} className='w-24 h-auto dark:invert' alt='ink space logo' />
             ink space</p>
         </div>
-        <div className='border-t-[1px] border-black dark:border-white mt-2 pt-2 flex justify-between'>
+          <ElasticLine
+            releaseThreshold={10}
+            strokeWidth={1}
+            animateInTransition={{
+              type: "spring",
+              stiffness: 200,
+              damping: 20,
+              delay: 0.05,
+            }}
+          />
+
+        <div className='border-black dark:border-white mt-2 pt-2 flex justify-between'>
           <p> © 2025 Ink Space</p>
           <p>
             Made by Abhinav Kumar
