@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 const LandingFooter = () => {
   return (
-    <div className='flex flex-col items-end relative'>
+    <div className='flex flex-col items-end sticky bottom-0 z-0'>
       <div className='TOP bg-blue-400 w-3/4 h-10 p-4 rounded-xl rounded-br-none '></div>
       <div className="TRIANGLE w-20 h-0 border-l-[40px] absolute left-[14rem] border-l-transparent border-b-[40px] border-b-blue-400"></div>
       <div className='BOTTOM bg-blue-400 w-full h-72 p-8 rounded-t-xl rounded-tr-none flex flex-col justify-end '>

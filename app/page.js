@@ -6,12 +6,15 @@ import React from 'react'
 
 const page = () => {
   return (
-    <>
-      <LandingHero/>
-      <LandingSection/>
-      <LandingSection2/>
-      <LandingFooter/>
-    </>
+    <div className="flex flex-col min-h-screen">
+      <div className="flex-grow z-10">
+        <LandingHero />
+        <LandingSection />
+        <LandingSection2 />
+      </div>
+      
+      <LandingFooter />
+    </div>
   );
 };
 

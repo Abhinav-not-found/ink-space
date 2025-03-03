@@ -119,9 +119,9 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 @font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/Satoshi/Satoshi-Variable.ttf') format('truetype'),
-  url('/fonts/Satoshi/Satoshi-VariableItalic.ttf') format('truetype');
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi/Satoshi-Variable.ttf") format("truetype"),
+    url("/fonts/Satoshi/Satoshi-VariableItalic.ttf") format("truetype");
 }
 
 @layer base {
@@ -131,28 +131,30 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-poppins), sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
   }
 }
 
-h1{
+h1 {
   font-size: 3rem;
   font-weight: 600;
 }
-h2{
+h2 {
   font-size: 2rem;
   font-weight: 500;
 }
-ul{
+ul {
   list-style-type: disc;
   margin-left: 1.5rem;
 }
-ol li{
+ol li {
   margin-bottom: 0.5rem;
 }
-ol{
+ol {
   list-style-type: decimal;
   margin-left: 1.5rem;
 }
-ul li{
+ul li {
   margin-bottom: 0.5rem;
 }

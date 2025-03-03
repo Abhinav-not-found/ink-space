@@ -5,7 +5,7 @@ import LandingCard2 from './LandingCard2';
 const LandingSection = () => {
   const commonStyle = "w-full bg-red-50 rounded-xl";
   return (
-    <div className="grid grid-cols-4 grid-rows-3 gap-y-6 gap-x-6 py-20">
+    <div className="grid grid-cols-4 grid-rows-3 gap-y-6 gap-x-6 py-20 bg-white dark:bg-black">
       <div className={`${commonStyle} h-64 row-span-2 col-span-2`}>
         <LandingCard img={''} title={"wake up and smell the coffee"} />
       </div>

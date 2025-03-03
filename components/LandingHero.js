@@ -8,7 +8,7 @@ const squarePeg = Square_Peg({
 
 const LandingHero = () => {
   return (
-    <div className=''>
+    <div className='bg-white dark:bg-black'>
       <section className="relative">
         <div className="flex flex-col items-center w-full">
           <p style={{fontFamily:'Satoshi'}} className="text-9xl font-semibold self-start">
