@@ -6,13 +6,13 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
     try {
         await connectToDatabase();
-        const { title, desc, category, username } = await req.json();
+        const { title, desc, category, username, thumbnail } = await req.json();
 
         if (!title || !desc || !category || !username) {
             return NextResponse.json({ message: "These fields are required" }, { status: 400 });
         }
 
-        const newBlog = new Blog({ title, desc, category, username });
+        const newBlog = new Blog({ title, desc, category, username, thumbnail });
         console.log("Before Saving:", newBlog);
         const savedBlog = await newBlog.save();
         console.log("After Saving:", savedBlog);

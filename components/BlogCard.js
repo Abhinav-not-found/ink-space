@@ -16,7 +16,9 @@ const BlogCard = ({data}) => {
           <Badge variant="">{data.category}</Badge>
         </div>
       </div>
-      <div className='w-72 h-44 bg-red-200 rounded-xl cursor-pointer'></div>
+      {data.thumbnail && 
+        <div className='w-72 h-44 bg-red-200 rounded-xl cursor-pointer'></div>
+      }
     </div>
   )
 }

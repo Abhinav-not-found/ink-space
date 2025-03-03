@@ -26,7 +26,7 @@ const Page = () => {
       const res = await fetch('/api/blog', {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, desc, category, username }),
+        body: JSON.stringify({ title, desc, category, username, thumbnail }),
       });
 
       const data = await res.json();

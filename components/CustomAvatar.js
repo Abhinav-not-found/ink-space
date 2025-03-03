@@ -8,7 +8,6 @@ import { PiUserBold } from "react-icons/pi";
 
 const CustomAvatar = () => {
   const { user, logout } = useContext(AuthContext)
-  console.log(user)
   return (
     <div>
       <Popover>

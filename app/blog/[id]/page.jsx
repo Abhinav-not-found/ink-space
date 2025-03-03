@@ -48,7 +48,9 @@ const page = () => {
       ) : (
         <div className="">
           <section>
+            {blogData?.thumbnail && 
             <div className="bg-red-300 w-full h-60 rounded-2xl mb-6"></div>
+            }
           </section>
           <section className="mb-8">
             <p className="text-6xl font-bold first-letter:uppercase">

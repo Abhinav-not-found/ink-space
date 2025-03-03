@@ -17,6 +17,11 @@ const BlogSchema = new mongoose.Schema({
     username:{
       type:String,
       required:true,
+    },
+    thumbnail:{
+      type:Boolean,
+      required:true,
+      default:false
     }
 }, { timestamps: true });
 
