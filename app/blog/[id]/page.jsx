@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
+import './blogDetailed.css'
 
 const page = () => {
   const { id } = useParams();
@@ -53,11 +54,11 @@ const page = () => {
             }
           </section>
           <section className="mb-8">
-            <p className="text-6xl font-bold first-letter:uppercase">
+            <h1 className="title text-6xl font-bold first-letter:uppercase">
               {blogData.title || "The Future of Web Development"}
-            </p>
+            </h1>
             <div className="text-gray-500 text-sm mt-2 flex  gap-4">
-              <p className="text-lg">
+              <p className="text-lg username">
                 By <span className="font-semibold first-letter:uppercase">{blogData.username || 'John Doe'}</span> | Published
                 on {date?.split("T")[0]}
               </p>

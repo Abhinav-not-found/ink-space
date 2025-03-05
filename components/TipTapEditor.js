@@ -1,10 +1,8 @@
 "use client";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Bold from "@tiptap/extension-bold";
-import Italic from "@tiptap/extension-italic";
 import Underline from "@tiptap/extension-underline";
-import Heading from "@tiptap/extension-heading";
+import HardBreak from "@tiptap/extension-hard-break"; // ✅ Import HardBreak
 import {
   FaBold,
   FaItalic,
@@ -12,45 +10,51 @@ import {
   FaListOl,
   FaListUl,
   FaHeading
-} from 'react-icons/fa'
+} from 'react-icons/fa';
 import { useState } from "react";
 
 const TipTapEditor = ({ content, setContent }) => {
-
-  const [headingLevel,setHeadingLevel]=useState('');
+  const [headingLevel, setHeadingLevel] = useState('');
 
   const editor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit, // ✅ Keep paragraph enabled
       Underline,
+      HardBreak.extend({ // ✅ Override Enter key behavior
+        addKeyboardShortcuts() {
+          return {
+            Enter: () => this.editor.commands.setHardBreak(), // Insert <br/>
+          };
+        },
+      }),
     ],
     content: content,
     onUpdate: ({ editor }) => {
       setContent(editor.getHTML());
     },
-    editorProps:{
-      attributes:{
-        class:'prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl focus:outline-none min-h-[250px]'
+    editorProps: {
+      attributes: {
+        class: 'prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl focus:outline-none min-h-[250px]'
       }
     },
-    immediatelyRender:false
   });
 
   if (!editor) {
     return <p>Loading editor...</p>;
   }
-  const handleHeadingChange = (e) => {
-    const value = Number(e.target.value);
 
-    if (value === 'p') {
-      // If the user selects the same level again, remove the heading
-      editor.chain().focus().setParagraph().run();
-      setHeadingLevel(""); // Reset selection
+  const handleHeadingChange = (e) => {
+    const value = e.target.value;
+
+    if (value === "p") {
+      editor.chain().focus().setParagraph().run(); 
+      setHeadingLevel(""); 
     } else {
-      // Apply new heading level
       editor.chain().focus().toggleHeading({ level: Number(value) }).run();
+      setHeadingLevel(value);
     }
   };
+
   return (
     <div className="border p-4 rounded-lg">
       {/* Toolbar */}
@@ -63,42 +67,40 @@ const TipTapEditor = ({ content, setContent }) => {
             value={headingLevel}
             onChange={handleHeadingChange}
             className="absolute top-0 left-0 opacity-0 w-full h-full cursor-pointer"
-            >
-              <option value={'p'}>Heading</option>
-            {[1,2].map((level)=>(
-              <option key={level} value={level}>
-                H{level}
-              </option>
+          >
+            <option value="p">Paragraph</option>
+            {[1, 2].map((level) => (
+              <option key={level} value={level}>H{level}</option>
             ))}
           </select>
         </div>
         <button
-          onClick={()=>editor.chain().focus().toggleBold().run()}
-          className={`p-2 ${editor.isActive('bold') ? 'bg-gray-300': ''}`}
+          onClick={() => editor.chain().focus().toggleBold().run()}
+          className={`p-2 ${editor.isActive('bold') ? 'bg-gray-300' : ''}`}
         >
           <FaBold/>
         </button>
         <button
-          onClick={()=>editor.chain().focus().toggleItalic().run()}
-          className={`p-2 ${editor.isActive('italic') ? 'bg-gray-300': ''}`}
+          onClick={() => editor.chain().focus().toggleItalic().run()}
+          className={`p-2 ${editor.isActive('italic') ? 'bg-gray-300' : ''}`}
         >
           <FaItalic/>
         </button>
         <button
-          onClick={()=>editor.chain().focus().toggleUnderline().run()}
-          className={`p-2 ${editor.isActive('underline') ? 'bg-gray-300': ''}`}
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
+          className={`p-2 ${editor.isActive('underline') ? 'bg-gray-300' : ''}`}
         >
           <FaUnderline/>
         </button>
         <button
-          onClick={()=>editor.chain().focus().toggleBulletList().run()}
-          className={`p-2 ${editor.isActive('bulletList') ? 'bg-gray-300': ''}`}
+          onClick={() => editor.chain().focus().toggleBulletList().run()}
+          className={`p-2 ${editor.isActive('bulletList') ? 'bg-gray-300' : ''}`}
         >
           <FaListUl/>
         </button>
         <button
-          onClick={()=>editor.chain().focus().toggleOrderedList().run()}
-          className={`p-2 ${editor.isActive('orderedList') ? 'bg-gray-300': ''}`}
+          onClick={() => editor.chain().focus().toggleOrderedList().run()}
+          className={`p-2 ${editor.isActive('orderedList') ? 'bg-gray-300' : ''}`}
         >
           <FaListOl/>
         </button>

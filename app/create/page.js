@@ -25,21 +25,21 @@ const Page = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const editor = new EditorJS({
-        holder: 'textEditor',
-        placeholder: "Let's write an awesome story!!!",
-        tools: tools,
-        onChange: async () => {
-          const savedData = await editor.save();
-          setDesc(savedData);
-        }
-      });
+      // const editor = new EditorJS({
+      //   holder: 'textEditor',
+      //   placeholder: "Let's write an awesome story!!!",
+      //   tools: tools,
+      //   onChange: async () => {
+      //     const savedData = await editor.save();
+      //     setDesc(savedData);
+      //   }
+      // });
 
-      editorInstance.current = editor;
+      // editorInstance.current = editor;
 
-      return () => {
-        editor.destroy().catch(err => console.log(err));
-      };
+      // return () => {
+      //   editor.destroy().catch(err => console.log(err));
+      // };
     }
   }, []);
 

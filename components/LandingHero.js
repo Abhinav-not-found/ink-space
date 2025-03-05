@@ -1,6 +1,7 @@
 import React from 'react'
 import { Square_Peg } from "next/font/google";
 
+
 const squarePeg = Square_Peg({
   subsets: ["latin"],
   weight: "400",
@@ -11,18 +12,18 @@ const LandingHero = () => {
     <div className='bg-white dark:bg-black'>
       <section className="relative">
         <div className="flex flex-col items-center w-full">
-          <p style={{fontFamily:'Satoshi'}} className="text-9xl font-semibold self-start">
+          <p style={{ fontFamily: 'Satoshi' }} className="text-9xl font-semibold self-start">
             <span className="text-[#007BFF] font-bold">E</span>xplore
           </p>
-          <p style={{fontFamily:'Satoshi'}} className="text-9xl font-semibold self-center">
+          <p style={{ fontFamily: 'Satoshi' }} className="text-9xl font-semibold self-center">
             <span className="text-[#FFD700] font-bold">I</span>nspire
           </p>
-          <p style={{fontFamily:'Satoshi'}} className="text-9xl font-semibold self-end">
+          <p style={{ fontFamily: 'Satoshi' }} className="text-9xl font-semibold self-end">
             <span className="text-[#ff2200] font-bold">C</span>reate
           </p>
         </div>
         <p className="absolute top-14 right-32 opacity-50 text-3xl text-right font-Poppins">
-          Unleash Your Creativity<br/> Through Words
+          Unleash Your Creativity<br /> Through Words
         </p>
         <p className="absolute bottom-2 left-10 opacity-50 text-3xl font-Poppins">
           Think. Create. Inspire.
@@ -43,7 +44,7 @@ const LandingHero = () => {
 
         <div className="w-3/5 h-full bg-yellow-500 rounded-3xl"></div>
         <div className="w-4/5 h-full bg-yellow-500 rounded-3xl"></div>
-        <div className="absolute bottom-0 left-[16rem] w-44 h-44 bg-blue-500 rounded-full border-[10px] border-white dark:border-black"></div>
+        {/* <div className="absolute bottom-0 left-[16rem] w-44 h-44 bg-blue-500 rounded-full border-[10px] border-white dark:border-black"></div> */}
       </div>
     </div>
   )

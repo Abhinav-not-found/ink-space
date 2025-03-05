@@ -15,9 +15,6 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { TextShimmer } from '@/components/motion-primitives/text-shimmer';
 
-
-
-
 const LoginPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible((prevState) => !prevState);
