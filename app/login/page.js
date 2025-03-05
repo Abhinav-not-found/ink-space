@@ -13,6 +13,7 @@ import LoginSVG from '../../public/login.svg'
 import { AuthContext } from '@/context/authContext';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { TextShimmer } from '@/components/motion-primitives/text-shimmer';
 
 
 
@@ -25,19 +26,19 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext)
   const router = useRouter();
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false)
 
   const handleLogin = async (e) => {
     setLoading(true)
     e.preventDefault();
 
-    if ( !email || !password ) return toast.error('These fields are required!')
-    const result = await login(email, password)  
-    if(result?.success) {
+    if (!email || !password) return toast.error('These fields are required!')
+    const result = await login(email, password)
+    if (result?.success) {
       router.push('/home')
       setLoading(false)
     }
-    else{
+    else {
       setLoading(false)
     }
   }
@@ -76,7 +77,9 @@ const LoginPage = () => {
               )}
             </button>
           </div>
-          <Button onClick={handleLogin} className='w-5/6'>{loading? 'Please wait...':'login'}</Button>
+          <Button onClick={handleLogin} className='w-5/6'>{loading ? <TextShimmer className='font-mono text-sm' duration={1}>
+            Please wait...
+            </TextShimmer> : 'Login'}</Button>
         </div>
         <div className='flex flex-col items-center mt-4'>
           <p className='mt-4 mb-10'>or continue with</p>
@@ -90,6 +93,7 @@ const LoginPage = () => {
           <div className='flex gap-2'>
             <p className='font-semibold'>Not a member?</p>
             <Link href={'/register'} className='underline'>Register now</Link>
+            
           </div>
         </div>
       </div>

@@ -9,6 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.30.8",
+    "@editorjs/embed": "^2.7.6",
+    "@editorjs/header": "^2.8.8",
+    "@editorjs/image": "^2.10.2",
+    "@editorjs/inline-code": "^1.5.1",
+    "@editorjs/list": "^2.0.6",
+    "@editorjs/marker": "^1.4.0",
+    "@editorjs/quote": "^2.7.6",
     "@next/font": "^14.2.15",
     "@phosphor-icons/react": "github:phosphor-icons/react",
     "@prisma/client": "^6.4.1",
@@ -27,7 +35,7 @@
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.476.0",
     "mongoose": "^8.11.0",
-    "motion": "^12.4.7",
+    "motion": "^12.4.10",
     "next": "15.2.1-canary.1",
     "next-themes": "^0.4.4",
     "phosphor-icons": "^1.4.2",

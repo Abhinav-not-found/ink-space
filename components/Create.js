@@ -12,7 +12,7 @@ const Create = () => {
   const gender = user?.gender
   console.log(gender)
   return (
-    <div className=" w-full h-52 flex justify-between items-center bg-red-300 mt-1 px-6 py-20 rounded-xl">
+    <div className=" w-full h-52 flex justify-between items-center bg-[#9dc4fb] mt-1 px-6 py-20 rounded-xl">
       <div className="w-1/2">
         <h1 className="text-4xl mb-2 font-Poppins font-bold capitalize">Hello { name || 'Sarah'}!</h1>
         <p className="mb-4 text-lg font-Satoshi font-medium">

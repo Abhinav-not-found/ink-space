@@ -1,21 +1,47 @@
 'use client'
 import { Button } from '@/components/ui/button';
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import TipTapEditor from "@/components/TipTapEditor";
 import { AuthContext } from '@/context/authContext';
 import { FaCheck } from "react-icons/fa6";
 import { RiCloseLargeFill } from "react-icons/ri";
+import { tools } from '@/components/tools';
+import dynamic from 'next/dynamic';
+
+const EditorJS = dynamic(() => import('@editorjs/editorjs'), { ssr: false });
 
 const Page = () => {
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
+  console.log(desc)
   const [category, setCategory] = useState('');
   const [loading, setLoading] = useState(false);
   const [thumbnail, setThumbnail] = useState(false)
   const router = useRouter();
   const { user } = useContext(AuthContext)
+  const editorInstance = useRef(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const editor = new EditorJS({
+        holder: 'textEditor',
+        placeholder: "Let's write an awesome story!!!",
+        tools: tools,
+        onChange: async () => {
+          const savedData = await editor.save();
+          setDesc(savedData);
+        }
+      });
+
+      editorInstance.current = editor;
+
+      return () => {
+        editor.destroy().catch(err => console.log(err));
+      };
+    }
+  }, []);
 
   const handleSubmit = async () => {
     if (!title || !desc || !category) return toast.error('This field is empty!');
@@ -64,6 +90,9 @@ const Page = () => {
         placeholder='Tell your story...'
         className='text-xl border border-x-0 border-t-0 border-gray-500 mt-10 placeholder:italic outline-none'
       />
+      <div id='textEditor' className='bg-red-50 w-full'>
+
+      </div>
       <div className='flex gap-20'>
         <select
           value={category}

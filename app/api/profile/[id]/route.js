@@ -7,7 +7,7 @@ export async function GET(req, { params }) {
   try {
     await connectToDatabase();
 
-    const userId = params.id;
+    const userId = await params.id;
     console.log("Fetching user with ID:", userId);
 
     if (!mongoose.Types.ObjectId.isValid(userId)) { 

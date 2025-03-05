@@ -10,6 +10,8 @@ import RegisterSVG from '../../public/register.svg';
 import { AuthContext } from '@/context/authContext';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { TextShimmer } from '@/components/motion-primitives/text-shimmer';
+
 
 const RegisterPage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -18,22 +20,25 @@ const RegisterPage = () => {
   const [fullname, setFullname] = useState('')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const { register } = useContext(AuthContext)
   const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true)
     if (!fullname || !email || !password) return toast.error('These fields are required!')
 
     if (password.length < 6) {
       return toast.error("Password must be at least 6 characters long!");
     }
-    
+
     const response = await register(fullname, email, password);
-    
+
     if (response?.success) {
       router.push("/login");
+      setLoading(false)
     }
   }
 
@@ -68,7 +73,9 @@ const RegisterPage = () => {
               )}
             </button>
           </div>
-          <Button onClick={handleSubmit} className='w-5/6'>Sign Up</Button>
+          <Button onClick={handleSubmit} className='w-5/6'>{loading ? <TextShimmer className='font-mono text-sm' duration={1}>
+            Please wait...
+          </TextShimmer> : 'Sign Up'}</Button>
         </div>
         {/* <div className='flex flex-col items-center mt-4'>
           <p className='mt-4 mb-10'>or sign up with</p>
