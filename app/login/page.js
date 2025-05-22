@@ -14,15 +14,18 @@ import { AuthContext } from '@/context/authContext';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { TextShimmer } from '@/components/motion-primitives/text-shimmer';
+import useRedirectIfLoggedIn from '../hooks/useRedirectIfLoggedIn';
 
 const LoginPage = () => {
+  useRedirectIfLoggedIn()
+  const router = useRouter()
+
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible((prevState) => !prevState);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext)
-  const router = useRouter();
   const [loading, setLoading] = useState(false)
 
   const handleLogin = async (e) => {

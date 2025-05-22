@@ -1,19 +1,20 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import { ClientProviders } from "@/components/client-providers";
-import { Poppins } from "next/font/google";
+import { ReactQueryProvider } from "../components/ReactQueryClientProvider";
 import { Toaster } from 'sonner'
+import { Poppins } from "next/font/google";
 
 export const metadata = {
   title: "Ink Space",
   description: "Where creativity flows.",
-  icons:'/logo.svg'
+  icons: '/logo.svg',
 };
 
 const poppins = Poppins({
-  subsets: ["latin"], // Ensures only the required characters are loaded
-  weight: ["400", "600", "700"], // Load specific font weights
-  variable: "--font-poppins", // Assign a CSS variable for global usage
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-poppins",
 });
 
 export default function RootLayout({ children }) {
@@ -29,11 +30,13 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          <div className="w-[80%] max-w-6xl m-auto">
-            <Toaster richColors />
-            <Navbar/>
-            {children}
-          </div>
+          <ReactQueryProvider>
+            <div className="w-[80%] max-w-6xl m-auto">
+              <Toaster richColors />
+              <Navbar />
+              {children}
+            </div>
+          </ReactQueryProvider>
         </ClientProviders>
       </body>
     </html>

@@ -5,17 +5,16 @@ import mongoose from "mongoose";
 
 export async function GET(req, { params }) {
   try {
+    const userId = await params.id;
     await connectToDatabase();
 
-    const userId = await params.id;
     console.log("Fetching user with ID:", userId);
 
     if (!mongoose.Types.ObjectId.isValid(userId)) { 
       return NextResponse.json({ error: "Invalid user ID format" }, { status: 400 });
     }
 
-    // ✅ Fixed: Using `_id` instead of `id`
-    const user = await User.findById(userId).select("_id username email"); 
+    const user = await User.findById(userId).select("-password"); 
     
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });

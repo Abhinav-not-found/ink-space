@@ -59,9 +59,9 @@ export const AuthProvider = ({ children }) => {
 
         localStorage.setItem("userId", data.user.id);
         setUser(data.user);
-        setIsLoggedIn(true); // ✅ Update state immediately
+        setIsLoggedIn(true); 
         toast.success("Login successful!");
-        router.push("/home"); // ✅ Redirect after login
+        router.push("/home"); 
       } else {
         toast.error(data.error || "Something went wrong.");
       }

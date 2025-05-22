@@ -5,9 +5,11 @@ import { Button } from './ui/button'
 import { AuthContext } from '@/context/authContext'
 import { MdOutlineLogout } from "react-icons/md";
 import { PiUserBold } from "react-icons/pi";
+import { useRouter } from 'next/navigation'
 
 const CustomAvatar = () => {
   const { user, logout } = useContext(AuthContext)
+  const router = useRouter()
   return (
     <div>
       <Popover>
@@ -18,7 +20,7 @@ const CustomAvatar = () => {
         </PopoverTrigger>
         <PopoverContent>
           <div className='flex flex-col gap-4'>
-            <Button variant={'ghost'} className='w-full flex justify-start py-'>
+            <Button onClick={()=>router.push(`/profile/${user?._id}`)} variant={'ghost'} className='w-full flex justify-start py-'>
             <PiUserBold />
               Profile</Button>
             <Button variant={'ghost'} onClick={logout} className='w-full flex justify-start'>

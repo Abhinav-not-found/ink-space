@@ -11,9 +11,13 @@ import { AuthContext } from '@/context/authContext';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { TextShimmer } from '@/components/motion-primitives/text-shimmer';
+import useRedirectIfLoggedIn from '../hooks/useRedirectIfLoggedIn';
 
 
 const RegisterPage = () => {
+  useRedirectIfLoggedIn()
+  const router = useRouter()
+    
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible((prevState) => !prevState);
 
@@ -22,7 +26,6 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const { register } = useContext(AuthContext)
-  const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault();

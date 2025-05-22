@@ -1,6 +1,6 @@
 'use client'
 import { Button } from '@/components/ui/button';
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useId, useRef, useState } from "react";
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import TipTapEditor from "@/components/TipTapEditor";
@@ -48,11 +48,12 @@ const Page = () => {
 
     setLoading(true);
     const username = user.username
+    const userId = user._id
     try {
       const res = await fetch('/api/blog', {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, desc, category, username, thumbnail }),
+        body: JSON.stringify({ title, desc, category, username, thumbnail, userId }),
       });
 
       const data = await res.json();
@@ -104,6 +105,9 @@ const Page = () => {
           <option value="Health">Health</option>
           <option value="Business">Business</option>
           <option value="Lifestyle">Lifestyle</option>
+          <option value="Food">Food</option>
+          <option value="Programming">Programming</option>
+          <option value="Travel">Travel</option>
         </select>
 
 

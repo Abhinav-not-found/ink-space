@@ -18,6 +18,10 @@ const BlogSchema = new mongoose.Schema({
       type:String,
       required:true,
     },
+    userId:{
+      type:String,
+      required:true,
+    },
     thumbnail:{
       type:Boolean,
       required:true,
