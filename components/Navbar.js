@@ -10,7 +10,7 @@ import { AuthContext } from "@/context/authContext";
 
 const Navbar = () => {
   const router = useRouter();
-  const { isLoggedIn } = useContext(AuthContext); // ✅ Use context
+  const { isLoggedIn } = useContext(AuthContext);
 
   return (
     <nav className="flex justify-between items-center h-16">

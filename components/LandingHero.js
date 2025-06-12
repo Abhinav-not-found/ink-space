@@ -40,10 +40,16 @@ const LandingHero = () => {
         </p>
       </section>
       <div className="w-full h-80 mt-10 flex gap-3 relative">
-        <div className="w-3/5 h-full bg-red-500 rounded-3xl"></div>
+        <div className="w-3/5 h-full bg-red-500 rounded-3xl p-8">
+          <p className='text-5xl font-semibold'>Why Simplicity Wins on the Web?</p>
+        </div>
 
-        <div className="w-3/5 h-full bg-yellow-500 rounded-3xl"></div>
-        <div className="w-4/5 h-full bg-yellow-500 rounded-3xl"></div>
+        <div className="w-3/5 h-full bg-yellow-400 rounded-3xl p-8 text-black">
+          <p className='text-5xl font-semibold'>Build Fast. Launch Faster</p>
+        </div>
+        <div className="w-4/5 h-full bg-yellow-400 rounded-3xl p-8 text-black">
+          <p className='text-5xl font-semibold'>Design Isn’t Just Looks — It’s Strategy</p>
+        </div>
         {/* <div className="absolute bottom-0 left-[16rem] w-44 h-44 bg-blue-500 rounded-full border-[10px] border-white dark:border-black"></div> */}
       </div>
     </div>
