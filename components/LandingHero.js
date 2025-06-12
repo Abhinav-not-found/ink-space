@@ -1,5 +1,6 @@
 import React from 'react'
 import { Square_Peg } from "next/font/google";
+import { LayoutTemplate, Rocket, WandSparkles } from 'lucide-react';
 
 
 const squarePeg = Square_Peg({
@@ -40,15 +41,18 @@ const LandingHero = () => {
         </p>
       </section>
       <div className="w-full h-80 mt-10 flex gap-3 relative">
-        <div className="w-3/5 h-full bg-red-500 rounded-3xl p-8">
-          <p className='text-5xl font-semibold'>Why Simplicity Wins on the Web?</p>
+        <div className="w-3/5 h-full bg-red-500 rounded-3xl p-8 relative">
+          <p className='text-4xl font-semibold'>Why Simplicity Wins on the Web?</p>
+          <LayoutTemplate className='size-18 absolute bottom-10 right-10' />
         </div>
 
-        <div className="w-3/5 h-full bg-yellow-400 rounded-3xl p-8 text-black">
-          <p className='text-5xl font-semibold'>Build Fast. Launch Faster</p>
+        <div className="w-3/5 h-full bg-yellow-400 rounded-3xl p-8 text-black relative">
+          <p className='text-4xl font-semibold'>Build Fast. Launch Faster</p>
+          <Rocket className='size-18 absolute bottom-10 right-10' />
         </div>
-        <div className="w-4/5 h-full bg-yellow-400 rounded-3xl p-8 text-black">
-          <p className='text-5xl font-semibold'>Design Isn’t Just Looks — It’s Strategy</p>
+        <div className="w-4/5 h-full bg-yellow-400 rounded-3xl p-8 text-black relative">
+          <p className='text-4xl font-semibold'>Design Isn’t Just Looks — It’s Strategy</p>
+          <WandSparkles className='size-18 absolute bottom-10 right-10'  />
         </div>
         {/* <div className="absolute bottom-0 left-[16rem] w-44 h-44 bg-blue-500 rounded-full border-[10px] border-white dark:border-black"></div> */}
       </div>
