@@ -6,7 +6,7 @@ import LandingSection2 from '@/components/LandingSection2';
 import React  from 'react'
 import useRedirectIfLoggedIn from './hooks/useRedirectIfLoggedIn';
 
-const page = () => {
+const Page = () => {
   useRedirectIfLoggedIn()
 
   return (
@@ -21,4 +21,4 @@ const page = () => {
   );
 };
 
-export default page
+export default Page
