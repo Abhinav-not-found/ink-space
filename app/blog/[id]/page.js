@@ -19,7 +19,7 @@ const fetchBlog = async (id) => {
 };
 
 
-const page = () => {
+const Page = () => {
   const { id } = useParams();
   const [owner, setOwner] = useState(false);
   const router = useRouter()
@@ -111,4 +111,4 @@ const page = () => {
   );
 }
 
-export default page;
+export default Page;
